@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Hub</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.daily-feed { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+.daily-feed h2 { font-size: 2rem; margin-bottom: 2.5rem; border-bottom: 2px solid #8a2be2; display: inline-block; padding-bottom: 0.5rem; }
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+.post-card { background: #111; border: 1px solid #222; padding: 2.5rem; border-radius: 4px; transition: transform 0.2s ease, border-color 0.2s ease; }
+.post-card:hover { transform: translateY(-4px); border-color: #8a2be2; }
+.post-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+.post-card p { color: #999; margin-bottom: 1.5rem; }
+.post-card a { font-family: -apple-system, sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<header class="site-header">
+<div class="logo">THE HUB</div>
+</header>
+<section class="hero">
+<h1>Exclusive: The Future of Streaming</h1>
+</section>
+
+<section class="daily-feed">
+<h2>The Daily Drop</h2>
+<div class="grid-container">
+<article class="post-card">
+<h3>My First Daily Drop</h3>
+<p>This is the foundation for your daily updates. You can write your articles here, drop in links, and share news.</p>
+<!-- This is the magic link that connects the pages! -->
+<a href="articles/daily-1.html">Read Article ➔</a>
+</article>
+</div>
+</section>
+</body>
+</html>
