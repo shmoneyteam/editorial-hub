@@ -1,38 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>The Hub</title>
-<link rel="stylesheet" href="css/style.css">
-<style>
-.daily-feed { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
-.daily-feed h2 { font-size: 2rem; margin-bottom: 2.5rem; border-bottom: 2px solid #8a2be2; display: inline-block; padding-bottom: 0.5rem; }
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-.post-card { background: #111; border: 1px solid #222; padding: 2.5rem; border-radius: 4px; transition: transform 0.2s ease, border-color 0.2s ease; }
-.post-card:hover { transform: translateY(-4px); border-color: #8a2be2; }
-.post-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
-.post-card p { color: #999; margin-bottom: 1.5rem; }
-.post-card a { font-family: -apple-system, sans-serif; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHMONEYSZN | Coming Soon</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: #0a0a0a; color: #ededed; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
+    h1 { font-family: Georgia, serif; font-size: 3.5rem; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
+    p { color: #888; font-size: 1.2rem; max-width: 500px; line-height: 1.5; margin-bottom: 2.5rem; }
+    .signup-form { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 400px; }
+    input[type="email"] { padding: 15px; border-radius: 4px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 1rem; outline: none; }
+    input[type="email"]:focus { border-color: #8a2be2; }
+    button { padding: 15px; border-radius: 4px; border: none; background: #8a2be2; color: #fff; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+    button:hover { background: #6a1b9a; }
+  </style>
 </head>
 <body>
-<header class="site-header">
-<div class="logo">THE HUB</div>
-</header>
-<section class="hero">
-<h1>Exclusive: The Future of Streaming</h1>
-</section>
-
-<section class="daily-feed">
-<h2>The Daily Drop</h2>
-<div class="grid-container">
-<article class="post-card">
-<h3>My First Daily Drop</h3>
-<p>This is the foundation for your daily updates. You can write your articles here, drop in links, and share news.</p>
-<!-- This is the magic link that connects the pages! -->
-<a href="articles/daily-1.html">Read Article ➔</a>
-</article>
-</div>
-</section>
+  <h1>SHMONEYSZN</h1>
+  <p>Something is cooking. Drop your email to lock in early access and get notified when we launch.</p>
+  
+  <!-- Web3Forms Integration -->
+  <form action="https://api.web3forms.com/submit" method="POST" class="signup-form">
+    <!-- Replace YOUR_ACCESS_KEY_HERE with your actual Web3Forms key -->
+    <input type="hidden" name="access_key" value="0260d308-f469-4a2b-87db-7854c260df65">
+    <input type="email" name="email" placeholder="Enter your email address" required>
+    <button type="submit">Notify Me</button>
+  </form>
 </body>
 </html>
