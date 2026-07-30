@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHMONEYSZN | Success</title>
+  <title>SHMONEYSZN | Locked In</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -17,91 +17,156 @@
       min-height: 100vh;
       text-align: center;
       padding: 20px;
-    }
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      font-weight: 900;
-      letter-spacing: 2px;
+      overflow: hidden; /* Prevents scrollbars while the sticker jumps around */
+      transition: background-color 0.3s ease;
     }
     
-    .flag-container {
-      width: 150px;
-      height: 150px;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    
-    .realistic-flag {
+    /* MAIN CONTENT WRAPPER */
+    #mainContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
       width: 100%;
-      height: 100%;
-      background-color: #000;
+    }
+
+    /* THE SUCCESS TEXT */
+    .success-text {
+      color: #FFD700;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+      margin-bottom: 40px;
+      max-width: 800px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    /* THE GAME CONTAINER */
+    .game-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .click-hint {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      pointer-events: none; /* Stops text from blocking clicks */
+    }
+
+    /* THE STICKER */
+    .sticker {
+      width: 120px;
+      height: 120px;
       background-image: url('logo.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      border-radius: 8px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      border-radius: 8px; /* Slight rounding */
+      /* Creates the thick white border drop-shadow sticker effect */
+      box-shadow: 0 0 0 6px #fff, 0 10px 20px rgba(0,0,0,0.5); 
+      cursor: crosshair;
+      transition: transform 0.05s ease;
+      z-index: 100;
     }
     
-    .desc-container {
-      margin-bottom: 2rem;
-      display: flex;
+    .sticker:active {
+      transform: scale(0.9); /* Squishes slightly when clicked */
+    }
+    
+    /* THE SECRET VIDEO SCREEN */
+    #videoScreen {
+      display: none; /* Hidden until the 7th click */
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      height: 100vh;
+      background-color: #000;
     }
     
-    .success-text {
-      color: #FFD700;
-      font-size: 2.5rem;
-      font-weight: bold;
-      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-      margin-bottom: 10px;
+    #videoScreen h1 {
+      color: #ffffff;
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+      text-transform: lowercase; 
+      font-weight: 900;
+      letter-spacing: 2px;
     }
-
-    p.description {
-      color: #555;
-      font-size: 1.1rem;
-      max-width: 450px;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .back-btn {
-      padding: 15px 30px;
-      border-radius: 0;
-      border: 2px solid #000;
-      background: #000;
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      font-family: inherit;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .back-btn:hover {
-      background: red;
-      border-color: red;
-      box-shadow: 4px 4px 0 #000;
+    
+    iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      border: none;
+      box-shadow: 0 0 30px rgba(255,255,255,0.1);
     }
   </style>
 </head>
 <body>
-  <div class="flag-container">
-    <div class="realistic-flag"></div>
+  
+  <!-- PHASE 1: THE SUCCESS PAGE & MINIGAME -->
+  <div id="mainContent">
+    <div class="success-text">
+      NICE! DROPPING SOON AND YOU'RE FIRST TO SEE EVERYTHING NEW $HMONEYTEAM... LOCK IN
+    </div>
+    
+    <div class="game-wrapper">
+      <div class="click-hint" id="clickHint">click here.</div>
+      <div class="sticker" id="stickerBtn"></div>
+    </div>
   </div>
-  
-  <h1>SHMONEYSZN</h1>
-  
-  <div class="desc-container">
-    <div class="success-text">YOU ARE LOCKED IN.</div>
-    <p class="description">Your email has been added to the crew. Keep an eye out for updates.</p>
+
+  <!-- PHASE 2: THE SECRET BLACK PAGE -->
+  <div id="videoScreen">
+    <h1>shmoneyszn</h1>
+    <iframe id="ytVideo" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
-  
-  <a href="index.html" class="back-btn">RETURN TO HUB</a>
+
+  <script>
+    let clickCount = 0;
+    const sticker = document.getElementById('stickerBtn');
+    const clickHint = document.getElementById('clickHint');
+    const mainContent = document.getElementById('mainContent');
+    const videoScreen = document.getElementById('videoScreen');
+    const ytVideo = document.getElementById('ytVideo');
+
+    sticker.addEventListener('click', () => {
+      clickCount++;
+      
+      if (clickCount === 1) {
+         // Hide the text hint immediately after the first click
+         clickHint.style.display = 'none';
+         // Change to fixed positioning so it can teleport anywhere on the screen
+         sticker.style.position = 'fixed';
+      }
+      
+      if (clickCount < 7) {
+        // Calculate random coordinates inside the browser window
+        // Subtracting 150 ensures it doesn't spawn off the edge of the screen
+        const maxX = window.innerWidth - 150; 
+        const maxY = window.innerHeight - 150;
+        
+        const randomX = Math.max(20, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(20, Math.floor(Math.random() * maxY));
+        
+        // Move the sticker
+        sticker.style.left = randomX + 'px';
+        sticker.style.top = randomY + 'px';
+        
+      } else if (clickCount === 7) {
+        // Trigger the secret video phase
+        mainContent.style.display = 'none'; // Hide the white page content
+        document.body.style.backgroundColor = '#000000'; // Turn background black
+        videoScreen.style.display = 'flex'; // Show the video container
+        
+        // Inject the YouTube link with autoplay so it starts instantly
+        ytVideo.src = "https://www.youtube.com/embed/gxbmy1-QqRM?autoplay=1";
+      }
+    });
+  </script>
 </body>
 </html>
