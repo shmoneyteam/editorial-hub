@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHMONEYSZN | The Hub</title>
+  <style>
+    :root {
+      --bg: #f4f4f2;
+      --text: #0a0a0a;
+      --gold: #FFD700;
+      --border: 2px solid #0a0a0a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* PREMIUM EDITORIAL HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: #fff;
+      border-bottom: var(--border);
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    /* ANIMATED PIRATE FLAG LOGO */
+    .mast-container {
+      position: relative;
+      width: 90px;
+      height: 70px;
+      display: flex;
+      align-items: flex-end;
+    }
+    .flag-pole {
+      width: 4px;
+      height: 100%;
+      background-color: #333;
+      border-radius: 2px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+    }
+    .flag-fabric {
+      position: absolute;
+      left: 3px;
+      top: 5px;
+      width: 85px;
+      height: 55px;
+      background-color: #000;
+      background-image: url('./C3C11001-D7AE-4DAC-B36E-158819238B1A.JPG');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 0 4px 4px 0;
+      transform-origin: left center;
+      animation: flagWave 2s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite alternate;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    /* Dynamic lighting/shading on the waving fabric */
+    .flag-fabric::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 100%);
+      background-size: 200% 100%;
+      animation: shadowMove 2s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite alternate;
+    }
+    @keyframes flagWave {
+      0% { transform: perspective(400px) rotateY(10deg) skewY(-2deg); }
+      100% { transform: perspective(400px) rotateY(-20deg) skewY(3deg); }
+    }
+    @keyframes shadowMove {
+      0% { background-position: 100% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    /* BRAND TYPOGRAPHY */
+    .brand-name {
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-name span {
+      font-family: "Courier New", Courier, monospace;
+    }
+    .gold-money {
+      color: var(--gold);
+      font-size: 1.8rem;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+      animation: spin 4s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    /* SOCIAL ICONS (SVG) */
+    .socials {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .social-link {
+      color: var(--text);
+      transition: transform 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .social-link svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+    .social-link:hover {
+      color: #777;
+      transform: translateY(-2px);
+    }
+
+    /* MODERN NAVIGATION */
+    .navbar {
+      background-color: var(--text);
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 1rem;
+    }
+    .nav-item {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .nav-item:hover::after {
+      width: 100%;
+    }
+
+    /* TICKER */
+    .ticker-wrap {
+      width: 100%;
+      background-color: #fff;
+      padding: 0.6rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: var(--border);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .ticker-text {
+      display: inline-block;
+      animation: ticker 20s linear infinite;
+      padding-left: 100%;
+    }
+    @keyframes ticker {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
+    }
+
+    /* HIGH-END EDITORIAL GRID (Inspired by Highsnobiety / Complex) */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+    }
+
+    /* FEATURED ARTICLE */
+    .featured {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .featured-img {
+      width: 100%;
+      height: 500px;
+      background-color: #000;
+      background-image: url('./C3C11001-D7AE-4DAC-B36E-158819238B1A.JPG');
+      background-size: cover;
+      background-position: center;
+      border: var(--border);
+    }
+    .category-tag {
+      font-family: "Courier New", Courier, monospace;
+      font-weight: bold;
+      color: var(--text);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+      align-self: flex-start;
+      padding-bottom: 2px;
+    }
+    .featured-title {
+      font-size: 3rem;
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    .featured-excerpt {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    
+    /* CUSTOM WIDGETS */
+    .widget {
+      border: var(--border);
+      background: #fff;
+      padding: 2rem;
+      position: relative;
+    }
+    .widget::before {
+      content: '';
+      position: absolute;
+      top: 5px; left: 5px; right: -9px; bottom: -9px;
+      background: var(--text);
+      z-index: -1;
+    }
+    .widget-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    /* NEWSLETTER */
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .newsletter-form input {
+      padding: 12px;
+      border: var(--border);
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+    .newsletter-form input:focus {
+      border-color: var(--gold);
+    }
+    .newsletter-form button {
+      padding: 12px;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover {
+      background: var(--gold);
+      color: var(--text);
+    }
+
+    /* MINIMAL ARTICLE LIST */
+    .article-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .article-list li a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.3;
+      display: block;
+      transition: color 0.2s;
+    }
+    .article-list li a:hover {
+      color: #888;
+    }
+    .article-meta {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.75rem;
+      color: #777;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .container { grid-template-columns: 1fr; padding: 2rem; }
+      .header { flex-direction: column; gap: 20px; text-align: center; }
+      .header-left { flex-direction: column; }
+      .featured-title { font-size: 2.2rem; }
+      .featured-img { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <header class="header">
+    <div class="header-left">
+      
+      <!-- THE WAVING PIRATE MAST -->
+      <div class="mast-container">
+        <div class="flag-pole"></div>
+        <div class="flag-fabric"></div>
+      </div>
+
+      <div class="brand-name">
+        <span>$</span>HMONEY SZN 
+        <div class="gold-money">$$$</div>
+      </div>
+    </div>
+
+    <!-- SOCIAL ICONS -->
+    <div class="socials">
+      <!-- Instagram SVG -->
+      <a href="#" class="social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+        </svg>
+      </a>
+      <!-- X (Twitter) SVG -->
+      <a href="#" class="social-link" aria-label="X">
+        <svg viewBox="0 0 24 24">
+          <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+        </svg>
+      </a>
+      <!-- YouTube SVG (Linked to specific channel) -->
+      <a href="https://www.youtube.com/@gshmoneyb" target="_blank" class="social-link" aria-label="YouTube">
+        <svg viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <a href="#" class="nav-item">News</a>
+    <a href="#" class="nav-item">Music</a>
+    <a href="#" class="nav-item">Shop</a>
+    <a href="#" class="nav-item">Features</a>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-text">
+      TRENDING: EARLY ACCESS DROPPING SOON /// NEW MERCH IN THE SHOP /// EXCLUSIVE CONTENT UPDATED WEEKLY /// LOCK IN WITH THE CREW
+    </div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="container">
+    
+    <!-- LEFT COLUMN (Featured) -->
+    <main class="featured">
+      <div class="category-tag">Feature Story</div>
+      <div class="featured-img"></div>
+      <h2 class="featured-title">Making Waves: Miami Weekend Recap</h2>
+      <p class="featured-excerpt">
+        From touching down at the Marriott Biscayne Bay to hitting the throttle with MDQ Watersports, the weekend was a movie. But the absolute highlight? Golden hour on the bow of a private sunset charter. She said yes! Officially locked in as my girlfriend. Read the full story on how we celebrated later that night at Gianni's and caught the views from the Sugar Rooftop...
+      </p>
+    </main>
+
+    <!-- RIGHT COLUMN (Sidebar) -->
+    <aside class="sidebar">
+      
+      <!-- Newsletter Widget -->
+      <div class="widget">
+        <h3 class="widget-title">The Inner Circle</h3>
+        <form class="newsletter-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="0260d308-f469-4a2b-87db-7854c260df65">
+          <input type="email" name="email" placeholder="Email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
+      <!-- Quick Links Widget -->
+      <div class="widget">
+        <h3 class="widget-title">Latest Drops</h3>
+        <ul class="article-list">
+          <li>
+            <a href="#">Vibe Check: 1 Hotel South Beach</a>
+            <div class="article-meta">Lifestyle | 2 min read</div>
+          </li>
+          <li>
+            <a href="#">Dinner Review: Paperfish Sushi</a>
+            <div class="article-meta">Culture | 4 min read</div>
+          </li>
+          <li>
+            <a href="#">Late Nights at Barsecco & Crazy About You</a>
+            <div class="article-meta">Nightlife | 3 min read</div>
+          </li>
+        </ul>
+      </div>
+      
+    </aside>
+  </div>
+
+</body>
+</html>
